@@ -10,7 +10,8 @@ import './App.css';
 // import Form from './Form';
 // import Student1 from './Student1';
 // import Student2 from './Student2';
-import Template1 from './Template1';
+// import Template1 from './Template1';
+import Template2 from './Template2';
 function App() {
 //  const posts = [
 // {id : 1 , title : "React" , pic : "https://cdn.pixabay.com/photo/2023/12/08/05/38/cat-8436843_640.jpg"},
@@ -32,7 +33,8 @@ function App() {
  {/* <Form/> */}
  {/* <Student1/> */}
  {/* <Student2/> */}
- <Template1/>
+ {/* <Template1/> */}
+ <Template2/>
  </>
   );
 }
