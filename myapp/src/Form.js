@@ -10,6 +10,7 @@ function Form() {
 const[errors,setErrors] = useState({})
 
   const handleInput = (event) => {
+   
     const { name, value } = event.target;
     setFormdata({
       ...formData,
@@ -22,7 +23,8 @@ const[errors,setErrors] = useState({})
   const handleSubmit = (event) => {
     event.preventDefault();
  const errors = validate(formData)
-  if(Object.keys(errors).length === 0){
+  // if(Object.keys(errors).length === 0){
+    if(errors.length === 0){
 alert("Submitted")
   } else {
     setErrors(errors)
@@ -55,7 +57,7 @@ return errors
       <input type="password" name="password" value={formData.password} onChange={handleInput} />
    <p>{errors.password}</p>
       <label>Enter Email</label>
-      <input type="text" name="email" value={formData.password} onChange={handleInput} />
+      <input type="text" name="email" value={formData.email} onChange={handleInput} />
      
       <p>{errors.email}</p>
       <button>Submit</button>

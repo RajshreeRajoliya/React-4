@@ -28,29 +28,81 @@
 // export default Refer;
 
 
+// import React from 'react'
+// import { useState , useEffect , useRef } from 'react'
 
 
-import React from "react";
-import { useRef,Fragment } from "react";
 
-function Refer(){
-   const focusPoint = useRef(null) 
-   function handleInput(){
-    focusPoint.current.value = "MAGIC SHOW"
-    focusPoint.current.value()
-   }
- 
-return(
+// function Refer() {
+//     const[data , setData] = useState("")
+//     // const[count , setCount] = useState(0)
+
+//     const count = useRef(0)
+// useEffect(()=>{
+//     // setCount(count + 1)
+//     count.current = count.current + 1
+// })
+
+
+//   return (
+//     <div>
+//       <input value = {data} onChange={(e)=>setData(e.target.value)} />
+//       <p>Changes : {count.current}</p>
+//     </div>
+//   )
+// }
+
+// export default Refer
+
+
+
+// import React from 'react'
+// import { useState , useEffect , useRef } from 'react'
+
+// function Refer() {
+//     const[data , setData] = useState("")
+//     // const [count , setCount] = useState()
+//     const count = useRef(0)
+
+//     useEffect(()=>{
+//         // setCount(count + 1)
+
+//         count.current = count.current + 1
+//     })
+//   return (
+//     <div>
+//       <input value={data} onChange={(e)=>setData(e.target.value)}/>
+//       <p>Current Changes :{count.current} </p>
+//     </div>
+//   )
+// }
+
+// export default Refer
+
+
+
+import React from 'react'
+import { useState , useRef , useEffect , Fragment } from 'react'
+
+function Refer() {
+  const[inputValue , setinputValue] = useState("")
+  const[count , setCount] = useState(0)
+  // const count = useRef(0)
+
+  useEffect(()=>{
+    setCount(count + 1)
+    // count.current = count.current + 1
+  },[])
+  return (
     <Fragment>
-
-<h1>WANT TO SEE A MAGIC TRICK</h1>
-<button onClick={handleInput}>ACTION</button>
-<br/>
-<textarea ref = {focusPoint}/>
+      <input value={inputValue} onChange={(e)=>setinputValue(e.target.value)} />
+      {
+        console.log(inputValue)
+      }
+      <h1>Count Changes : {count}</h1>
     </Fragment>
-)
-
-
+  )
 }
 
 export default Refer
+
