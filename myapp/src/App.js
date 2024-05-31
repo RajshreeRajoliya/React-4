@@ -1,5 +1,5 @@
 
-// import './App.css';
+import './App.css';
 // import Log from './Log';
 // import Greeting from './Greeting';
 // import Counter from './Counter';
@@ -19,6 +19,7 @@
 // import Todo from './Todo';
 // import Frm from "./components/Frm";
 
+import Example from "./Example";
 import Todoha from "./components/Todoha";
 function App() {
  const posts = [
@@ -49,7 +50,8 @@ function App() {
  {/* <Todo/> */}
 
 {/* <Todoss/> */}
-<Todoha/>
+{/* <Todoha/>*/}
+<Example/>
  </>
   );
 }

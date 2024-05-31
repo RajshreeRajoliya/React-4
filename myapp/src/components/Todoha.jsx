@@ -1,80 +1,67 @@
-import React from 'react'
-import { useState } from 'react'
-
+import React, { useState, useEffect } from 'react';
 
 function Todoha() {
-    const[inputValue , setInputValue] = useState('')
-    const[todos , setTodos] = useState([])
-   const[editId , setEditID] = useState(null)
-localStorage.setItem("todos",JSON.stringify(todos))
+  const [inputValue, setInputValue] = useState('');
+  const [todos, setTodos] = useState([]);
+  const [editId, setEditId] = useState(null);
 
-function addTask(){
+  useEffect(() => {
+    const storedTodos = JSON.parse(sessionStorage.getItem('todos')) || [];
+    setTodos(storedTodos);
+  }, []);
 
-if(editId !== null){
-setTodos(todos.map(todo=>{
-  if(todo.id === editId){
-    return {...todo , text : inputValue}
+  useEffect(() => {
+    sessionStorage.setItem('todos', JSON.stringify(todos));
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
+  function addTask() {
+    if (editId !== null) {
+      setTodos((prevTodos) =>
+        prevTodos.map((todo) =>
+          todo.id === editId ? { ...todo, text: inputValue } : todo
+        )
+      );
+      setEditId(null);
+    } else {
+      const newTodo = {
+        id: new Date().getTime(),
+        text: inputValue,
+      };
+      setTodos((prevTodos) => [...prevTodos, newTodo]);
+      setInputValue('');
+    }
   }
-  return todo
-}))
-setEditID(null);
-}else {
-  let newTodos = {
-    // id : new Date().getTime(),
-    id : new Date().getTime(),
-    text : inputValue
 
-}
+  function deleteTodo(id) {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  }
 
-
-setTodos([...todos,newTodos])
-setInputValue('')
-
-}
- 
-
- 
-  
-}
-
-function deleteTodo(id){
-  setTodos(todos.filter((todo)=>(
-    todo.id != id
-  )))
-}
-function editTodo(id){
-const todoToedit = todos.find(todo=>todo.id === id)
-setInputValue(todoToedit.text)
-setEditID(id)
-}
+  function editTodo(id) {
+    const todoToEdit = todos.find((todo) => todo.id === id);
+    setInputValue(todoToEdit.text);
+    setEditId(id);
+  }
 
   return (
-    <div style={{textAlign : "center"}}>
+    <div style={{ textAlign: 'center' }}>
       <h1>TODO APP</h1>
-     
       <input
-        type='text'
-        placeholder = "Enter Task"
-        value = {inputValue}
-        onChange={(e)=>setInputValue(e.target.value)}
+        type="text"
+        placeholder="Enter Task"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
       />
-     
       <button onClick={addTask}>Add Task</button>
-      
-{
-    todos.map((todo)=>(
-
-<>
-<h1 key={todo.id}>{todo.text}</h1>
-<button onClick={()=>editTodo(todo.id)}>Edit</button>
-<button onClick={()=>deleteTodo(todo.id)}>Delete</button>
-
-</>
-    ))
-}
-
+      {todos.map((todo) => (
+        <div key={todo.id}>
+          <h1>{todo.text}</h1>
+          <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+          <button onClick={() => editTodo(todo.id)}>Edit</button>
+        </div>
+      ))}
     </div>
-  )
+  );
 }
 
-export default Todoha
+export default Todoha;
